@@ -6,55 +6,90 @@ if (empty($_SESSION['namauser']) and empty($_SESSION['passuser'])) {
 	echo "<a href=index.php><b>LOGIN</b></a></center>";
 } else {
 	?>
-	<html>
+	<!DOCTYPE html>
+	<html lang="en">
+
 	<head>
-		<title>.:: Halaman Utama Administrator ::.</title>
-		<link href="../include/admin_style.css" rel="stylesheet" type="text/css">
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>.:: Administrator ::.</title>
+
+		<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
+
+		<link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
 	</head>
-	<body>
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td colspan="2" align="left" valign="top" background="../images/header_xxx.gif">
 
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="57%"> </td>
-							<td width="43%" valign="bottom">
+	<body id="page-top">
 
-								<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									<tr>
-										<td>&nbsp;</td>
-									</tr>
-									<tr>
-										<td align="right" class="judul">
-											<a href="server.php?module=home">Beranda</a> | <a href="server.php?module=gantipwd&id=<?= $_SESSION['namauser'];?>">Ganti Password</a> | <a href="logout.php">Logout</a>&nbsp;</td>
-										</tr>
-									</table>
+		<div id="wrapper">
 
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td width="200" valign="top" bgcolor="#CFD7C0" id="menu">
-						<?php include "menu.php"; ?>
-					</td>
-					<td align="left" valign="top" bgcolor="#FEFDF7" class="text" id="content">
-						<?php include "konten.php"; ?>
+			<?php include './menu.php'; ?>
 
-					</td>
-				</tr>
-				<tr>
-					<td height="40" colspan="2" align="center" valign="middle" background="../images/background_1.jpg">
-						<span class="kecil">Copyright <b>Polindra</b> &copy; 2011. All Right Reserved<br>
-							<span class="style_text">Design By <a href="http://www.polindra.ac.id" target="_blank">Training Center TI Polindra</a></span>
-						</span>
-					</td>
-				</tr>
-			</table>
-		</body>
-		</html>
-		<?php
-	}
+			<div id="content-wrapper" class="d-flex flex-column">
+
+				<div id="content">
+
+					<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+						<ul class="navbar-nav ml-auto">
+
+							<div class="topbar-divider d-none d-sm-block"></div>
+
+							<li class="nav-item dropdown no-arrow">
+								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['namauser'] ?></span>
+									<img class="img-profile rounded-circle"
+									src="../img/undraw_profile.svg">
+								</a>
+								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+									<a class="dropdown-item" href="./logout.php">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Logout
+									</a>
+								</div>
+							</li>
+
+						</ul>
+
+					</nav>
+
+					<?php include './konten.php'; ?>
+
+				</div>
+			</div>
+		</div>
+
+		<script src="../vendor/jquery/jquery.min.js"></script>
+		<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+		<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+		<script src="../js/sb-admin-2.min.js"></script>
+
+		<script src="../vendor/chart.js/Chart.min.js"></script>
+
+		<script src="../js/demo/chart-area-demo.js"></script>
+		<script src="../js/demo/chart-pie-demo.js"></script>
+
+		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+		<script>
+			tinymce.init({
+				selector: '#ket',
+				height: 400
+			});
+		</script>
+
+
+	</body>
+	<?php
+}
 ?>
