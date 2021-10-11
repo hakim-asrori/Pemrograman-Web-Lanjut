@@ -35,29 +35,46 @@ function get_bulan($bln)
 		case	6 :	
 		return	"Juni";
 		break;	
-		
+
 		case	7 :	
 		return	"Juli";
 		break;	
-		
+
 		case	8 :	
 		return	"Agustus";
 		break;	
-		
+
 		case	9 :	
 		return	"September";
 		break;	
-		
+
 		case	10 :	
 		return	"Oktober";
 		break;	
-		
+
 		case	11 :	
 		return	"Nopember";
 		break;	
-		
+
 		case	12 :	
 		return	"Desember";
 		break;	
 	}
+}
+
+function insertSecurityImage($inputname) { 
+	$refid = md5(mktime()*rand()); 
+	$insertstr = '<img src="securityimage.php?refid='.$refid.'" alt="Security Image" <input type="hidden" name='.$inputname.'  value='.$refid.'>'; 
+	echo($insertstr); 
+}
+
+function checkSecurityImage($referenceid, $enteredvalue) { 
+	$referenceid = mysql_escape_string($referenceid); 
+	$enteredvalue = mysql_escape_string($enteredvalue); 
+	$tempQuery = mysql_query("SELECT id FROM security_images WHERE referenceid='".$referenceid."' AND hiddentext='".$enteredvalue."'"); 
+	if (mysql_num_rows($tempQuery)!=0) { 
+		return true; 
+	} else { 
+		return false; 
+	} 
 }

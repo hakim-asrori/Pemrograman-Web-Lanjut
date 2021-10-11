@@ -5,7 +5,7 @@
 			if ($_GET['act'] == "tambah") {
 				?>
 				<h2>Tambah Galeri</h2>
-				<form method='post' action='aksi.php?module=galeri&act=input' enctype="multipart/form-data">
+				<form method='post' action='./aksi.php?module=galeri&act=input' enctype="multipart/form-data">
 					<table class="table table-hover mt-3">
 						<tr>
 							<td>Nama Galeri</td>
@@ -16,7 +16,7 @@
 							<td>Keterangan</td>
 							<td> : </td>
 							<td>
-								<textarea name="ket" id="ket" rows="4" class="form-control" required></textarea>
+								<textarea name="ket" id="ket" rows="4" class="form-control"></textarea>
 							</td>
 						</tr>
 						<tr>
