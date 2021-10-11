@@ -1,5 +1,7 @@
 <?php
 include "../include/koneksi.php";
+include "../include/captcha.php"; 
+
 $module=$_GET['module'];
 $act=$_GET['act'];
 
@@ -91,13 +93,23 @@ if ($module=='user' AND $act=='hapus') {
 		$alamat_bktamu = $_POST['alamat_bktamu'];
 		$komentar = $_POST['komentar'];
 
-		$cek = $koneksi->query("INSERT INTO buku_tamu (nm_bktamu,email_bktamu,alamat_bktamu,komentar) VALUES ('$nm_bktamu', '$email_bktamu', '$alamat_bktamu', '$komentar')");
+		$security_refid = $_POST["security_refid"]; 
+		$security_try = $_POST["security_try"]; 
 
-		if ($cek) {
-			header('location:server.php?module='.$module.'');
+		$checkSecurity = checkSecurityImage($security_refid, $security_try);
+
+		if ($checkSecurity) { 
+			$cek = $koneksi->query("INSERT INTO buku_tamu (nm_bktamu,email_bktamu,alamat_bktamu,komentar) VALUES ('$nm_bktamu', '$email_bktamu', '$alamat_bktamu', '$komentar')");
+
+			if ($cek) {
+				header('location:server.php?module='.$module.'');
+			}else{
+				print "<script>alert(\"Gagal simpan!!!\"); location.href = \"javascript:history.go(-1)\";</script>";
+			}
 		}else{
 			print "<script>alert(\"Gagal simpan!!!\"); location.href = \"javascript:history.go(-1)\";</script>";
 		}
+		
 	} catch (Exception $e) {
 		die($e->getMessage());
 	}

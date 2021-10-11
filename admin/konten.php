@@ -1,6 +1,7 @@
 <?php
 include "../include/koneksi.php"; 
 include "../include/konversi_tgl.php";
+include "../include/captcha.php"; 
 
 if (isset($_GET['module'])) { 
 	if ($_GET['module']=='user') {

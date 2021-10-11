@@ -61,20 +61,3 @@ function get_bulan($bln)
 		break;	
 	}
 }
-
-function insertSecurityImage($inputname) { 
-	$refid = md5(mktime()*rand()); 
-	$insertstr = '<img src="securityimage.php?refid='.$refid.'" alt="Security Image" <input type="hidden" name='.$inputname.'  value='.$refid.'>'; 
-	echo($insertstr); 
-}
-
-function checkSecurityImage($referenceid, $enteredvalue) { 
-	$referenceid = mysql_escape_string($referenceid); 
-	$enteredvalue = mysql_escape_string($enteredvalue); 
-	$tempQuery = mysql_query("SELECT id FROM security_images WHERE referenceid='".$referenceid."' AND hiddentext='".$enteredvalue."'"); 
-	if (mysql_num_rows($tempQuery)!=0) { 
-		return true; 
-	} else { 
-		return false; 
-	} 
-}

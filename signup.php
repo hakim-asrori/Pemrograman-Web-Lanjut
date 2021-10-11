@@ -1,16 +1,19 @@
 <?php 
-//Define function to insert security image 
-function insertSecurityImage($inputname) { 
-	$refid = md5(mktime()*rand()); 
-	$insertstr = "<img src=\"securityimage.php?refid=".$refid."\" alt=\"Security Image\">\n <input type=\"hidden\" name=\"".$inputname."\" value=\"".$refid."\">"; 
+
+function insertSecurityImage($inputname) {
+	$refid = md5(rand());
+	$insertstr = '<img src="securityimage.php?refid='.$refid.'" alt="Security Image" width="150"> <input type="hidden" name="'.$inputname.'" value="'.$refid.'">'; 
 	echo($insertstr); 
 } 
-	//Define function to check security image confirmation 
-function checkSecurityImage($referenceid, $enteredvalue) { 
-	$referenceid = mysql_escape_string($referenceid); 
-	$enteredvalue = mysql_escape_string($enteredvalue); 
-	$tempQuery = mysql_query("SELECT ID FROM security_images WHERE referenceid='".$referenceid."' AND hiddentext='".$enteredvalue."'");
-	if (mysql_num_rows($tempQuery)!=0) { 
+
+function checkSecurityImage($referenceid, $enteredvalue) {
+	include_once 'include/koneksi.php';
+
+	$referenceid = mysqli_real_escape_string($koneksi, $referenceid); 
+	$enteredvalue = mysqli_real_escape_string($koneksi, $enteredvalue); 
+
+	$tempQuery = $koneksi->query("SELECT id FROM security_images WHERE referenceid= '$referenceid' AND hiddentext = '$enteredvalue'");
+	if ($tempQuery->num_rows != 0) { 
 		return true; 
 	} else { 
 		return false; 
@@ -25,13 +28,9 @@ function checkSecurityImage($referenceid, $enteredvalue) {
 </head> 
 <body> 
 	<?php 
-	if (isset($HTTP_POST_VARS["name"]) && isset($HTTP_POST_VARS["security_try"])) { 
-
-		mysql_connect("localhost", "root", "");
-		mysql_select_db("security"); 
-
-		$security_refid = $HTTP_POST_VARS["security_refid"]; 
-		$security_try = $HTTP_POST_VARS["security_try"]; 
+	if (isset($_POST["name"]) && isset($_POST["security_try"])) { 
+		$security_refid = $_POST["security_refid"]; 
+		$security_try = $_POST["security_try"]; 
 		$checkSecurity = checkSecurityImage($security_refid, $security_try); 
 		if ($checkSecurity) { 
 			$validnot = "correct"; 
@@ -44,10 +43,9 @@ function checkSecurityImage($referenceid, $enteredvalue) {
 	?> 
 
 	<form name="signupform" method="post" action="<?=$_SERVER["PHP_SELF"]?>">
-		<?php var_dump($_SERVER['PHP_SELF']) ?>
 		Please sign up for our website: <br><br> 
 		Name: <input name="name" type="text" id="name"><br> 
-		<? insertSecurityImage("security_refid") ?><br> 
+		<?= insertSecurityImage("security_refid") ?><br> 
 		Enter what you see: <input name="security_try" type="text" id="security_try" size="20" maxlength="10"> 
 		(can't see? try reloading page) <br><br> 
 		<input type="submit" name="Submit" value="Signup!"> 

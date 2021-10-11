@@ -29,6 +29,15 @@
 							<textarea name="komentar" rows="4" class="form-control"></textarea>
 						</div>
 						<div class="form-group">
+							<label>Captcha</label>
+							<div class="row">
+								<div class="col-sm">
+									<input name="security_try" type="text" id="security_try" class="form-control">
+								</div>
+								<div class="col-sm-4"><?= insertSecurityImage("security_refid") ?></div>
+							</div>
+						</div>
+						<div class="form-group">
 							<button type="submit" class="btn btn-primary">Simpan</button>
 						</div>
 					</form>

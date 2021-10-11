@@ -1,5 +1,5 @@
 <?php
-include "include/koneksi.php";
+include "../include/koneksi.php";
 
 if (isset($_GET["refid"]) && $_GET["refid"]!="") { 
 	$referenceid = stripslashes($_GET["refid"]); 
@@ -8,7 +8,7 @@ if (isset($_GET["refid"]) && $_GET["refid"]!="") {
 }
 
 $bgurl = rand(1, 3); 
-$im = ImageCreateFromPNG("img/bg.png");
+$im = ImageCreateFromPNG("../img/bg.png");
 $chars = array("a","A","b","B","c","C","d","D","e","E","f","F","g", "G","h","H","i","I","j","J","k", "K","l","L","m","M","n","N","o","O","p","P","q","Q", "r","R","s","S","t","T","u","U","v", "V","w","W","x","X","y","Y","z","Z","1","2","3","4", "5","6","7","8","9"); 
 $length = 5; 
 $textstr = ""; 
@@ -17,9 +17,9 @@ for ($i=0; $i<$length; $i++) {
 	$textstr .= $chars[rand(0, count($chars)-1)]; 
 }
 
-$font = "trebuc.ttf";
-$size = rand(30, 100); 
-$angle = rand(-5, 5); 
+$font = "../trebuc.ttf";
+$size = rand(50, 100); 
+$angle = rand(-2, 5); 
 $color = ImageColorAllocate($im, rand(0, 100), rand(0, 100), rand(0, 100));
 $textsize = imagettfbbox($size, $angle, $font, $textstr); 
 $twidth = abs($textsize[2]-$textsize[0]);
